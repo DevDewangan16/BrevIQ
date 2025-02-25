@@ -49,6 +49,7 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
         backStackEntry?.destination?.route?:BrevIQAppScreen.HomeScreen.name
     )
 
+    // start destination will changes according to the user
     val startDestination = if (user == null) {
         BrevIQAppScreen.Login.name
     } else {
