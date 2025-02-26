@@ -1,0 +1,217 @@
+package com.example.gemi.ui
+
+import android.content.ClipData.Item
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.gemi.R
+
+@Composable
+fun HomeScreen(){
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(300.dp),
+        contentPadding = PaddingValues(vertical = 30.dp),
+
+        verticalArrangement = Arrangement.spacedBy(5.dp),
+        horizontalArrangement =Arrangement.spacedBy(5.dp),
+        ) {
+        item { 
+            Text(
+                text = "Welcome to BrevIQ",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 10.dp, end = 10.dp),
+                fontSize = 30.sp,
+                color = Color.Black
+                )
+        }
+        item {
+            Text(
+                text = "Transform Complexity into Clarity – AI-Powered Summaries & Insights!",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 10.dp, end = 10.dp),
+                fontSize = 20.sp,
+                color = Color.Black
+            )
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .size(width = 300.dp, height = 300.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFEEDEF6)
+                )
+            ) {
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.a),
+                            contentDescription = "",
+                            modifier = Modifier.size(150.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
+                        Text(
+                            text = "\uD83D\uDCC4 Summarize Documents & Notes",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Upload PDFs, text, or handwritten notes to generate concise summaries.",
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .size(width = 300.dp, height = 300.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFCCE5E3)
+                )
+            ) {
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.b),
+                            contentDescription = "",
+                            modifier = Modifier.size(150.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
+                        Text(
+                            text = "\uD83D\uDCD1 Analyze Medical Prescriptions",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Scan and convert complex prescriptions into easy-to-understand text.",
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .size(width = 300.dp, height = 300.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFFEE1B6)
+                )
+            ) {
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.c),
+                            contentDescription = "",
+                            modifier = Modifier.size(150.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
+                        Text(
+                            text ="\uD83D\uDCC2 View Recent Summarie",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Access and manage your latest processed documents.",
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .size(width = 300.dp, height = 300.dp)
+                    .padding(start = 10.dp, end = 10.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFFDCEDF)
+                )
+            ) {
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.d),
+                            contentDescription = "",
+                            modifier = Modifier.size(150.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
+                        Text(
+                            text ="\uD83D\uDCC2 View Recent Summarie",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Access and manage your latest processed documents.",
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
+    }
+}

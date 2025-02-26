@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -76,9 +77,9 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
             placeholder = {
                 Text(text = "Enter your Email")
             },
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
+            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors = TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
@@ -102,9 +103,9 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
             placeholder = {
                 Text(text = "Enter your Password")
             },
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
+            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors =TextFieldDefaults.outlinedTextFieldColors(
+            colors =OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
@@ -124,7 +125,7 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
             ) {
             Text(text = "Sign In",
                 fontSize = 15.sp,
-                modifier = androidx.compose.ui.Modifier.padding(start = 10.dp, end = 10.dp, bottom = 5.dp))
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 5.dp))
         }
         Row(
             horizontalArrangement = Arrangement.Center

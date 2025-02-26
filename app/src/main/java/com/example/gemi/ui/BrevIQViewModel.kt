@@ -7,7 +7,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-
 class BrevIQViewModel(application:Application):AndroidViewModel(application) {
     val _isvisible=MutableStateFlow<Boolean>(true)
     val isvisible=_isvisible

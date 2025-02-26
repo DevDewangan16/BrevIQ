@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "45607016257",
-    "project_id": "breviq",
-    "storage_bucket": "breviq.firebasestorage.app"
+    "project_number": "126208021761",
+    "project_id": "breviq-7ec14",
+    "storage_bucket": "breviq-7ec14.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:45607016257:android:3bc615827a1bbac4f273c0",
+        "mobilesdk_app_id": "1:126208021761:android:748aee278560493079b700",
         "android_client_info": {
           "package_name": "com.example.gemi"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDLoipz-4Lnfo2pIaADfE-sNJG_-w6j930"
+          "current_key": "AIzaSyCHuzg6qvGNKCDkVM2ubrSOndoYZMD9DAU"
         }
       ],
       "services": {

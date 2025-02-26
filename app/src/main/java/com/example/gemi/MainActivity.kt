@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.gemi.ui.BrevIQApp
+import com.example.gemi.ui.HomeScreen
 import com.example.gemi.ui.LoginUi
 import com.example.gemi.ui.SignUpScreen
 import com.example.gemi.ui.SplashScreen
@@ -26,7 +27,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             GemiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    BrevIQApp()
+                    //BrevIQApp()
+                    HomeScreen()
                 }
             }
         }

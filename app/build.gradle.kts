@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    //id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.example.gemi"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.gemi"
@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
     packaging {
         resources {
@@ -69,7 +69,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation (libs.androidx.compiler)
 
-    //implementation(platform(libs.firebase.bom))
-    //implementation(libs.firebase.analytics)
+
+
+    implementation(platform(libs.firebase.bom))
+    //implementation("com.google.firebase:firebase-analytics")
+    //implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
 }

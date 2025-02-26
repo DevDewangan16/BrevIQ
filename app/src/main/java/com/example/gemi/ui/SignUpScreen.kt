@@ -1,7 +1,6 @@
 package com.example.gemi.ui
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +13,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -28,7 +26,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -81,7 +78,7 @@ fun SignUpScreen(brevIQViewModel: BrevIQViewModel,
             },
             modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors =TextFieldDefaults.outlinedTextFieldColors(
+            colors = OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
@@ -107,7 +104,7 @@ fun SignUpScreen(brevIQViewModel: BrevIQViewModel,
             },
             modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors =TextFieldDefaults.outlinedTextFieldColors(
+            colors =OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
@@ -134,7 +131,7 @@ fun SignUpScreen(brevIQViewModel: BrevIQViewModel,
             },
             modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors =TextFieldDefaults.outlinedTextFieldColors(
+            colors =OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
@@ -160,7 +157,7 @@ fun SignUpScreen(brevIQViewModel: BrevIQViewModel,
             },
             modifier = androidx.compose.ui.Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
             singleLine = true,
-            colors =TextFieldDefaults.outlinedTextFieldColors(
+            colors =OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.Black,
                 focusedBorderColor = Color.Black,
                 focusedTextColor = Color.Black,
