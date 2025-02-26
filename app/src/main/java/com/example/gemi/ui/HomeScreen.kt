@@ -44,7 +44,8 @@ fun HomeScreen(){
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp),
                 fontSize = 30.sp,
-                color = Color.Black
+                color = Color.Black,
+                textAlign = TextAlign.Center
                 )
         }
         item {
@@ -53,8 +54,9 @@ fun HomeScreen(){
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 10.dp, end = 10.dp),
-                fontSize = 20.sp,
-                color = Color.Black
+                fontSize = 16.sp,
+                color = Color.Black,
+                textAlign = TextAlign.Center
             )
         }
         item {
