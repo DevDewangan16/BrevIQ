@@ -2,6 +2,7 @@ package com.example.gemi.ui
 
 import android.content.ClipData.Item
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,10 +27,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.gemi.R
 
 @Composable
-fun HomeScreen(){
+fun HomeScreen(brevIQViewModel: BrevIQViewModel,
+               navHostController: NavHostController){
     LazyVerticalGrid(
         columns = GridCells.Adaptive(300.dp),
         contentPadding = PaddingValues(vertical = 30.dp),
@@ -63,7 +66,10 @@ fun HomeScreen(){
             Card(
                 modifier = Modifier
                     .size(width = 300.dp, height = 300.dp)
-                    .padding(start = 10.dp, end = 10.dp),
+                    .padding(start = 10.dp, end = 10.dp)
+                    .clickable {
+                        navHostController.navigate(BrevIQAppScreen.SummarizationScreen.name)
+                    },
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFEEDEF6)
                 )

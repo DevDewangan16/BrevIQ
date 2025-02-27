@@ -17,6 +17,7 @@ import com.example.gemi.ui.HomeScreen
 import com.example.gemi.ui.LoginUi
 import com.example.gemi.ui.SignUpScreen
 import com.example.gemi.ui.SplashScreen
+import com.example.gemi.ui.SummariztionScreen
 import com.example.gemi.ui.theme.GemiTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,8 +28,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             GemiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    //BrevIQApp()
-                    HomeScreen()
+                    BrevIQApp()
+                   // HomeScreen()
                 }
             }
         }

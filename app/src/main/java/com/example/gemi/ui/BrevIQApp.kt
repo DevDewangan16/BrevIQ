@@ -12,7 +12,9 @@ import androidx.navigation.compose.rememberNavController
 enum class BrevIQAppScreen(){
     Login,
     SignUp,
-    SignIn
+    SignIn,
+    HomeScreen,
+    SummarizationScreen
 }
 
 @Composable
@@ -34,6 +36,13 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
             composable(route = BrevIQAppScreen.SignUp.name){
                 SignUpScreen(brevIQViewModel = brevIQViewModel,navHostController)
             }
+            composable(route = BrevIQAppScreen.SummarizationScreen.name){
+                SummariztionScreen(brevIQViewModel = brevIQViewModel)
+            }
+            composable(route = BrevIQAppScreen.HomeScreen.name){
+                HomeScreen(brevIQViewModel = brevIQViewModel, navHostController =navHostController )
+            }
         }
     }
+    
 }

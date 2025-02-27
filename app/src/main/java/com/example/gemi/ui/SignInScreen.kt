@@ -116,7 +116,9 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
 
             )
         Button(
-            onClick = {},
+            onClick = {
+                navHostController.navigate(BrevIQAppScreen.HomeScreen.name)
+            },
             colors = ButtonDefaults.buttonColors(
                 Color.Black
             ),
