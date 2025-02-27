@@ -1,4 +1,4 @@
-package com.example.gemi.ui
+package com.example.gemi.ui.data
 
 import com.google.gson.annotations.SerializedName
 

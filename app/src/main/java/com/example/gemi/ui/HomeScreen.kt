@@ -108,7 +108,10 @@ fun HomeScreen(brevIQViewModel: BrevIQViewModel,
             Card(
                 modifier = Modifier
                     .size(width = 300.dp, height = 300.dp)
-                    .padding(start = 10.dp, end = 10.dp),
+                    .padding(start = 10.dp, end = 10.dp)
+                    .clickable {
+                        navHostController.navigate(BrevIQAppScreen.PrescriptionScreen.name)
+                    },
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFCCE5E3)
                 )

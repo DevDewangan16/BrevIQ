@@ -14,12 +14,15 @@ enum class BrevIQAppScreen(){
     SignUp,
     SignIn,
     HomeScreen,
-    SummarizationScreen
+    SummarizationScreen,
+    PrescriptionScreen
 }
 
 @Composable
 fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
               navHostController: NavHostController= rememberNavController()){
+
+    val apiKey = "AIzaSyDbGhLvg47UU1tY7O0LS7dbeho1dFEuvPk"
 
     val isvisible by brevIQViewModel.isvisible.collectAsState()
 
@@ -41,6 +44,9 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
             }
             composable(route = BrevIQAppScreen.HomeScreen.name){
                 HomeScreen(brevIQViewModel = brevIQViewModel, navHostController =navHostController )
+            }
+            composable(route = BrevIQAppScreen.PrescriptionScreen.name){
+                ImageToTextScreen(brevIQViewModel = brevIQViewModel, apiKey =apiKey )
             }
         }
     }
