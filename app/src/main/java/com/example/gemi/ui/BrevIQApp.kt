@@ -34,9 +34,10 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
 
     if (isvisible){
         SplashScreen()
-    }else if (user==null){
-        SignInScreen(brevIQViewModel = brevIQViewModel, navHostController = navHostController)
     }
+//    else if (user==null){
+//        SignInScreen(brevIQViewModel = brevIQViewModel, navHostController = navHostController)
+//    }
     else{
         NavHost(navController = navHostController, startDestination =BrevIQAppScreen.Login.name ) {
             composable(route = BrevIQAppScreen.Login.name){
