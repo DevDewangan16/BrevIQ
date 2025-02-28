@@ -1,7 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
+    alias(libs.plugins.compose.compiler)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
 
 }
@@ -73,11 +74,21 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation (libs.androidx.compiler)
 
+    implementation(platform("com.google.firebase:firebase-bom:33.10.0"))
 
 
-    implementation(platform(libs.firebase.bom))
-    //implementation("com.google.firebase:firebase-analytics")
-    //implementation(libs.firebase.auth)
+    // TODO: Add the dependencies for Firebase products you want to use
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics:22.3.0")
+
+
+    // Add the dependencies for any other desired Firebase products
+    // https://firebase.google.com/docs/android/setup#available-libraries
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth:23.2.0")
+
     implementation(libs.play.services.auth)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
