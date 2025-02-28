@@ -19,6 +19,7 @@ import com.example.gemi.ui.data.Content
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.Part
 import com.google.android.gms.common.api.Response
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -92,15 +93,35 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
         }
     }
 
-
     val _isvisible=MutableStateFlow<Boolean>(true)
     val isvisible=_isvisible
+
+    fun toggleVisibility(){
+        isvisible.value=false
+    }
+
+    private val _user=MutableStateFlow<FirebaseUser?>(null)
+    val user:MutableStateFlow<FirebaseUser?>get() = _user
+
+    fun setUser(user:FirebaseUser){
+        _user.value=user
+    }
+
+    private val _email=MutableStateFlow<String>("")
+    val email:MutableStateFlow<String>get() =_email
+
+    private val _password=MutableStateFlow<String>("")
+    val password:MutableStateFlow<String>get() = _password
 
     private val _name=MutableStateFlow<String>("")
     val name :MutableStateFlow<String> get()=_name
 
-    fun toggleVisibility(){
-        isvisible.value=false
+    fun setEmail(email:String){
+        _email.value=email
+    }
+
+    fun setPassword(password:String){
+        _password.value=password
     }
 
     fun setName(name:String){

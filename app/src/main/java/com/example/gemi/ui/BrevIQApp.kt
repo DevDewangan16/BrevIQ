@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.firebase.auth.FirebaseAuth
 
 enum class BrevIQAppScreen(){
     Login,
@@ -17,6 +18,7 @@ enum class BrevIQAppScreen(){
     SummarizationScreen,
     PrescriptionScreen
 }
+val auth= FirebaseAuth.getInstance()
 
 @Composable
 fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
@@ -25,10 +27,17 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
     val apiKey = "AIzaSyDbGhLvg47UU1tY7O0LS7dbeho1dFEuvPk"
 
     val isvisible by brevIQViewModel.isvisible.collectAsState()
+    val user by brevIQViewModel.user.collectAsState()
+
+    auth.currentUser?.let { brevIQViewModel.setUser(it) }
+
 
     if (isvisible){
         SplashScreen()
-    }else{
+    }else if (user==null){
+        SignInScreen(brevIQViewModel = brevIQViewModel, navHostController = navHostController)
+    }
+    else{
         NavHost(navController = navHostController, startDestination =BrevIQAppScreen.Login.name ) {
             composable(route = BrevIQAppScreen.Login.name){
                 LoginUi(brevIQViewModel = brevIQViewModel,navHostController=navHostController)

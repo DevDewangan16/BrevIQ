@@ -1,5 +1,8 @@
 package com.example.gemi.ui
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -35,6 +39,9 @@ import com.example.gemi.R
 @Composable
 fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostController){
     val name by brevIQViewModel.name.collectAsState()
+    val baseContext = LocalContext.current
+    val email by brevIQViewModel.email.collectAsState()
+    val password by brevIQViewModel.password.collectAsState()
     Column (
         verticalArrangement = Arrangement.spacedBy(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -64,9 +71,9 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
         )
 
         OutlinedTextField(
-            value = name,
+            value = email,
             onValueChange = {
-                brevIQViewModel.setName(it)
+                brevIQViewModel.setEmail(it)
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Email
@@ -90,9 +97,9 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
 
             )
         OutlinedTextField(
-            value = name,
+            value = password,
             onValueChange = {
-                brevIQViewModel.setName(it)
+                brevIQViewModel.setPassword(it)
             },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Password
@@ -117,7 +124,20 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
             )
         Button(
             onClick = {
-                navHostController.navigate(BrevIQAppScreen.HomeScreen.name)
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+                            navHostController.navigate(BrevIQAppScreen.HomeScreen.name)
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.exception)
+                            Toast.makeText(
+                                baseContext,
+                                "Authentication failed.",
+                                Toast.LENGTH_SHORT,
+                            ).show()
+                        }
+                    }
             },
             colors = ButtonDefaults.buttonColors(
                 Color.Black
