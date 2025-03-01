@@ -37,6 +37,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.gemi.ui.data.DataBase
+import com.example.gemi.ui.data.RequestResponse
 
 @Composable
 fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostController) {
@@ -66,13 +68,19 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
                             text = "Response: $response",
                             style = MaterialTheme.typography.bodyLarge,
                         )
+                        Button(onClick = {
+                            brevIQViewModel.addToDatabase(DataBase(userInput.toString(),response))
+                        }) {
+                            Text(text = "Save")
+                        }
                     }
                 }
             }
 
             OutlinedTextField(
                 value = userInput, onValueChange = { userInput = it },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     // .weight(1f)
                     .padding(start = 3.dp, end = 3.dp, bottom = 17.dp)
                 ,placeholder = { Text("Ask Gemini...")},
@@ -99,3 +107,4 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
         }
     }
 }
+

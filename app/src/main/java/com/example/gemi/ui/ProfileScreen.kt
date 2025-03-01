@@ -1,6 +1,7 @@
 package com.example.gemi.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -76,7 +77,10 @@ fun ProfileScreen(brevIQViewModel: BrevIQViewModel){
         }
         Card(modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp),
+            .height(50.dp)
+            .clickable {
+                //brevIQViewModel.setLogoutStatus(true)
+            },
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFFFBAE75)
             )) {

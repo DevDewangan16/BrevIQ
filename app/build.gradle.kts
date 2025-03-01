@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.datastore.core.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -88,6 +89,9 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth:23.2.0")
+    implementation("com.google.firebase:firebase-database")
+    implementation("androidx.datastore:datastore-preferences:1.1.3")
+
 
     implementation(libs.play.services.auth)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")

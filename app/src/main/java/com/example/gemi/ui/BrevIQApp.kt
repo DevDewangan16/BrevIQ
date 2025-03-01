@@ -1,8 +1,13 @@
 package com.example.gemi.ui
 
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -18,7 +23,8 @@ enum class BrevIQAppScreen(){
     SummarizationScreen,
     PrescriptionScreen,
     History,
-    Profile
+    Profile,
+    SavedScreen
 }
 val auth= FirebaseAuth.getInstance()
 
@@ -30,6 +36,9 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
 
     val isvisible by brevIQViewModel.isvisible.collectAsState()
     val user by brevIQViewModel.user.collectAsState()
+
+    //val logoutClicked by brevIQViewModel.logoutClicked.collectAsState()
+
 
     auth.currentUser?.let { brevIQViewModel.setUser(it) }
 
@@ -66,7 +75,53 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
             composable(route = BrevIQAppScreen.Profile.name){
                 ProfileScreen(brevIQViewModel = brevIQViewModel)
             }
+            composable(route = BrevIQAppScreen.SavedScreen.name){
+                SaveScreen(brevIQViewModel = brevIQViewModel, navController =navHostController )
+            }
         }
+//        if (logoutClicked){
+//            AlertCheck(onYesButtonPressed = {
+//                auth.signOut()
+//                brevIQViewModel.clearData()
+//            },
+//                onNoButtonPressed = {
+//                    brevIQViewModel.setLogoutStatus(false)
+//                }
+//            )
+//        }
     }
     
 }
+//@Composable
+//fun AlertCheck(
+//    onYesButtonPressed:()->Unit,
+//    onNoButtonPressed:()->Unit
+//
+//){
+//    AlertDialog(
+//        title = {
+//            Text(text = "Logout?", fontWeight = FontWeight.Bold)
+//        },
+//        containerColor = Color.White,
+//        text = {
+//            Text(text = "Are you sure you want to Logout")
+//        },
+//        confirmButton = {
+//            TextButton(onClick = {
+//                onYesButtonPressed()
+//            }) {
+//                Text(text = "Yes")
+//            }
+//        },
+//        dismissButton = {
+//            TextButton(onClick = {
+//                onNoButtonPressed()
+//            }) {
+//                Text(text = "No")
+//            }
+//        },
+//        onDismissRequest = {
+//            onNoButtonPressed()
+//        }
+//    )
+//}

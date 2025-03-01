@@ -6,28 +6,44 @@ import GeminiImageResponse
 import InlineData
 import Part1
 import android.app.Application
+import android.content.Context
 import android.graphics.Bitmap
 import android.net.http.HttpException
 import android.os.Build
 import android.telecom.Call
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gemi.ui.ImageUtils.convertBitmapToBase64
 import com.example.gemi.ui.data.Content
+import com.example.gemi.ui.data.DataBase
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.Part
 import com.example.gemi.ui.data.RequestResponse
 import com.google.android.gms.common.api.Response
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.database
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.IOException
 import javax.security.auth.callback.Callback
 
@@ -40,6 +56,9 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
     private val _historyList = MutableStateFlow<List<RequestResponse>>(emptyList())
     val historyList: StateFlow<List<RequestResponse>> = _historyList
+
+    private val _databaseList=MutableStateFlow<List<DataBase>>(emptyList())
+    val databaseList:StateFlow<List<DataBase>>get() = _databaseList.asStateFlow()
 
     fun fetchResponse(prompt: String) {
         viewModelScope.launch {
@@ -136,10 +155,125 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
     fun setName(name:String){
         _name.value=name
     }
+
+//    private val _logoutClicked=MutableStateFlow(false)
+//    val logoutClicked:MutableStateFlow<Boolean>get() = _logoutClicked
+//
+//    fun setLogoutStatus(
+//        logoutStatus:Boolean
+//    ){
+//        _logoutClicked.value=logoutStatus
+//    }
+//
+//    fun clearData(){
+//        _user.value=null
+//        _name.value=" "
+//        _email.value=" "
+//        _password.value=" "
+//    }
+
+    val database= Firebase.database
+    val myRef = database.getReference("users/${auth.currentUser?.uid}/cart")
+
+    private val Context.datastore : DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore("cart")
+    private val cartItemsKey= stringPreferencesKey("cart_items")
+    private val context=application.applicationContext
+
+    lateinit var screenJob: Job
+    lateinit var InternetJob:Job
+
+    private suspend fun saveCartItemsToDataStore(){
+        context.datastore.edit { preferences->
+            preferences[cartItemsKey]= Json.encodeToString(_databaseList.value)
+        }
+    }
+
+    private suspend fun loadCartItemsFromDataStore(){
+        val fullData=context.datastore.data.first()
+        val cartItemsJson=fullData[cartItemsKey]
+        if (!cartItemsJson.isNullOrEmpty()){
+            _databaseList.value= Json.decodeFromString(cartItemsJson)
+        }
+    }
+
+    fun getSavedItems(){
+        InternetJob=viewModelScope.launch {
+            try {
+                loadCartItemsFromDataStore()
+            }catch (exception:Exception){
+                toggleVisibility()
+                screenJob.cancel()
+            }
+        }
+    }
+
+    fun addToCart(item:DataBase){
+        _databaseList.value = _databaseList.value + item
+        viewModelScope.launch {
+            saveCartItemsToDataStore()
+        }
+    }
+
+    fun addToDatabase(item:DataBase){
+        myRef.push().setValue(item)
+    }
+
+    fun fillCartItems(){
+        // Read from the database
+        myRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                _databaseList.value= emptyList()
+                for (childSnapshot in dataSnapshot.children){
+                    val item=childSnapshot.getValue(DataBase::class.java)
+                    item?.let {
+//                        val newItem=it
+//                        addToCart(newItem)
+                        _databaseList.value = _databaseList.value + it
+
+                    }
+                }
+//                setLoading(false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+    fun removeFromCart(oldItem:DataBase){
+        /* _cartItems.value = _cartItems.value - item
+         viewModelScope.launch {
+             saveCartItemsToDataStore()
+         }*/ //this code is for to remove item from the cart only not database
+        myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                //_databaseList.value= emptyList()
+                for (childSnapshot in dataSnapshot.children){
+                    var itemRemoved=false
+                    val item=childSnapshot.getValue(DataBase::class.java)
+                    item?.let {
+                        if (oldItem.request ==it.request && oldItem.response == it.response){
+                            childSnapshot.ref.removeValue()
+                            itemRemoved=true
+                        }
+                    }
+                    if(itemRemoved) break
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+    }
+
+
     init {
-        viewModelScope.launch(Dispatchers.Default) {
+        screenJob=viewModelScope.launch(Dispatchers.Default) {
             delay(3000)
             toggleVisibility()
         }
+        getSavedItems()
+        fillCartItems()
     }
+
 }
