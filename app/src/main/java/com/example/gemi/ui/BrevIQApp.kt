@@ -17,7 +17,8 @@ enum class BrevIQAppScreen(){
     HomeScreen,
     SummarizationScreen,
     PrescriptionScreen,
-    History
+    History,
+    Profile
 }
 val auth= FirebaseAuth.getInstance()
 
@@ -32,7 +33,7 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
 
     auth.currentUser?.let { brevIQViewModel.setUser(it) }
 
-
+   
     if (isvisible){
         SplashScreen()
     }
@@ -61,6 +62,9 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
             }
             composable(route = BrevIQAppScreen.History.name){
                 HistoryScreen(brevIQViewModel,navController = navHostController)
+            }
+            composable(route = BrevIQAppScreen.Profile.name){
+                ProfileScreen(brevIQViewModel = brevIQViewModel)
             }
         }
     }

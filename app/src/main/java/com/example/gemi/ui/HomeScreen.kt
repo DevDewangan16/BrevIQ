@@ -211,13 +211,57 @@ fun HomeScreen(brevIQViewModel: BrevIQViewModel,
                             contentScale = ContentScale.FillBounds
                         )
                         Text(
-                            text ="\uD83D\uDCC2 View Recent Summarie",
+                            text ="\uD83D\uDCD6 Keep Your Key Insights at Your Fingertips!",
                             fontSize = 18.sp,
                             color = Color.Black,
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
                         )
                         Text(
-                            text = "Access and manage your latest processed documents.",
+                            text = "Access, manage, and revisit your AI-generated summaries anytime, anywhere.",
+                            fontSize = 15.sp,
+                            color = Color.Black,
+                            textAlign = TextAlign.Center
+                        )
+
+                    }
+                }
+            }
+        }
+        item {
+            Card(
+                modifier = Modifier
+                    .size(width = 300.dp, height = 300.dp)
+                    .padding(start = 10.dp, end = 10.dp)
+                    .clickable {
+                        navHostController.navigate(BrevIQAppScreen.Profile.name)
+                    },
+                colors = CardDefaults.cardColors(
+                    containerColor = Color(0xFFFBAE75)
+                )
+            ) {
+                Box(modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center) {
+                    Column(
+                        modifier = Modifier.padding(10.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.e),
+                            contentDescription = "",
+                            modifier = Modifier.size(150.dp),
+                            contentScale = ContentScale.FillBounds
+                        )
+                        Text(
+                            text ="\uD83D\uDC64 Profile",
+                            fontSize = 18.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center
+                        )
+                        Text(
+                            text = "Personalize your experience & manage your preferences.",
                             fontSize = 15.sp,
                             color = Color.Black,
                             textAlign = TextAlign.Center
