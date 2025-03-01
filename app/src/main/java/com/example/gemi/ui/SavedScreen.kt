@@ -14,8 +14,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -28,9 +30,9 @@ fun SaveScreen(brevIQViewModel: BrevIQViewModel,navController: NavController) {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)) {
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = "Request History")
+        Text(text = "Saved Information")
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -48,10 +50,15 @@ fun SaveScreen(brevIQViewModel: BrevIQViewModel,navController: NavController) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(text = "Request: ${entry.request}")
                         Text(text = "Response: ${entry.response}")
-                        Button(onClick = {
-                           brevIQViewModel.removeFromCart(entry)
-                        }) {
-                            Text(text = "Remove")
+                        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            Button(onClick = {
+                                brevIQViewModel.removeFromCart(entry)
+                            },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF2F2F2F)
+                                )) {
+                                Text(text = "Remove")
+                            }
                         }
                     }
                 }
@@ -60,7 +67,10 @@ fun SaveScreen(brevIQViewModel: BrevIQViewModel,navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = { navController.popBackStack() }) {
+        Button(onClick = { navController.popBackStack() },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF2F2F2F)
+            )) {
             Text("Back to Home")
         }
     }

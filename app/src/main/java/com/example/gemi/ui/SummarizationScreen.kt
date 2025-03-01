@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -68,10 +69,20 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
                             text = "Response: $response",
                             style = MaterialTheme.typography.bodyLarge,
                         )
-                        Button(onClick = {
-                            brevIQViewModel.addToDatabase(DataBase(userInput.toString(),response))
-                        }) {
-                            Text(text = "Save")
+                        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                            Button(onClick = {
+                                brevIQViewModel.addToDatabase(
+                                    DataBase(
+                                        userInput.toString(),
+                                        response
+                                    )
+                                )
+                            },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color(0xFF2F2F2F)
+                                )) {
+                                Text(text = "Save")
+                            }
                         }
                     }
                 }
