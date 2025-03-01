@@ -36,9 +36,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 
 @Composable
-fun SummariztionScreen(brevIQViewModel: BrevIQViewModel) {
+fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostController) {
     var userInput by remember { mutableStateOf(TextFieldValue("")) }
     val response by brevIQViewModel.response.collectAsState()
 
@@ -68,6 +69,7 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel) {
                     }
                 }
             }
+
             OutlinedTextField(
                 value = userInput, onValueChange = { userInput = it },
                 modifier = Modifier.fillMaxWidth()

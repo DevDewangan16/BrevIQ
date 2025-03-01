@@ -18,11 +18,13 @@ import com.example.gemi.ui.ImageUtils.convertBitmapToBase64
 import com.example.gemi.ui.data.Content
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.Part
+import com.example.gemi.ui.data.RequestResponse
 import com.google.android.gms.common.api.Response
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -35,6 +37,9 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
     private val _response = MutableStateFlow("Ask something...")
     val response = _response.asStateFlow()
+
+    private val _historyList = MutableStateFlow<List<RequestResponse>>(emptyList())
+    val historyList: StateFlow<List<RequestResponse>> = _historyList
 
     fun fetchResponse(prompt: String) {
         viewModelScope.launch {
@@ -51,6 +56,10 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
                 val responseText = result.candidates?.getOrNull(0)?.content?.parts?.getOrNull(0)?.text ?: "No response"
 
                 _response.value = responseText
+
+                val newEntry = RequestResponse(prompt,responseText)
+                _historyList.value = _historyList.value + newEntry
+
 
             } catch (e: Exception) {
                 _response.value = "Error: ${e.message}"

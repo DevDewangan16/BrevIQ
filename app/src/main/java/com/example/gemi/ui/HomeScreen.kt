@@ -150,7 +150,10 @@ fun HomeScreen(brevIQViewModel: BrevIQViewModel,
             Card(
                 modifier = Modifier
                     .size(width = 300.dp, height = 300.dp)
-                    .padding(start = 10.dp, end = 10.dp),
+                    .padding(start = 10.dp, end = 10.dp)
+                    .clickable {
+                        navHostController.navigate(BrevIQAppScreen.History.name)
+                    },
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFFEE1B6)
                 )
@@ -169,7 +172,7 @@ fun HomeScreen(brevIQViewModel: BrevIQViewModel,
                             contentScale = ContentScale.FillBounds
                         )
                         Text(
-                            text ="\uD83D\uDCC2 View Recent Summarie",
+                            text ="\uD83D\uDCC2 View Recent Summaries",
                             fontSize = 18.sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Bold

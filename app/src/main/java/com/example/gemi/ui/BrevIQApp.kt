@@ -16,7 +16,8 @@ enum class BrevIQAppScreen(){
     SignIn,
     HomeScreen,
     SummarizationScreen,
-    PrescriptionScreen
+    PrescriptionScreen,
+    History
 }
 val auth= FirebaseAuth.getInstance()
 
@@ -50,13 +51,16 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
                 SignUpScreen(brevIQViewModel = brevIQViewModel,navHostController)
             }
             composable(route = BrevIQAppScreen.SummarizationScreen.name){
-                SummariztionScreen(brevIQViewModel = brevIQViewModel)
+                SummariztionScreen(brevIQViewModel = brevIQViewModel,navHostController)
             }
             composable(route = BrevIQAppScreen.HomeScreen.name){
                 HomeScreen(brevIQViewModel = brevIQViewModel, navHostController =navHostController )
             }
             composable(route = BrevIQAppScreen.PrescriptionScreen.name){
                 ImageToTextScreen(brevIQViewModel = brevIQViewModel, apiKey =apiKey )
+            }
+            composable(route = BrevIQAppScreen.History.name){
+                HistoryScreen(brevIQViewModel,navController = navHostController)
             }
         }
     }
