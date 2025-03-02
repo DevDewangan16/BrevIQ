@@ -156,21 +156,22 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
         _name.value=name
     }
 
-//    private val _logoutClicked=MutableStateFlow(false)
-//    val logoutClicked:MutableStateFlow<Boolean>get() = _logoutClicked
-//
-//    fun setLogoutStatus(
-//        logoutStatus:Boolean
-//    ){
-//        _logoutClicked.value=logoutStatus
-//    }
-//
-//    fun clearData(){
-//        _user.value=null
-//        _name.value=" "
-//        _email.value=" "
-//        _password.value=" "
-//    }
+    private val _logoutClicked=MutableStateFlow(false)
+    val logoutClicked: StateFlow<Boolean>
+        get() = _logoutClicked.asStateFlow()
+
+    fun setLogoutStatus(
+        logoutStatus:Boolean
+    ){
+        _logoutClicked.value=logoutStatus
+    }
+
+    fun clearData(){
+        _user.value=null
+        _name.value=""
+        _email.value=""
+        _password.value=""
+    }
 
     val database= Firebase.database
     val myRef = database.getReference("users/${auth.currentUser?.uid}/cart")

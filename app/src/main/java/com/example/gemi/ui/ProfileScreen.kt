@@ -79,7 +79,7 @@ fun ProfileScreen(brevIQViewModel: BrevIQViewModel){
             .fillMaxWidth()
             .height(50.dp)
             .clickable {
-                //brevIQViewModel.setLogoutStatus(true)
+                 brevIQViewModel.setLogoutStatus(true)
             },
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFFFBAE75)

@@ -127,7 +127,13 @@ fun SignInScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHostCont
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
-                            navHostController.navigate(BrevIQAppScreen.HomeScreen.name)
+                            navHostController.navigate(BrevIQAppScreen.HomeScreen.name){
+                                popUpTo(BrevIQAppScreen.SignIn.name) {
+                                    inclusive = true
+                                }
+                            }
+                            val user=task.result?.user
+                            user?.let { brevIQViewModel.setUser(user) }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.exception)

@@ -1,17 +1,20 @@
 package com.example.gemi.ui
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 
@@ -37,20 +40,28 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
     val isvisible by brevIQViewModel.isvisible.collectAsState()
     val user by brevIQViewModel.user.collectAsState()
 
-    //val logoutClicked by brevIQViewModel.logoutClicked.collectAsState()
+    val logoutClicked by brevIQViewModel.logoutClicked.collectAsState()
 
 
     auth.currentUser?.let { brevIQViewModel.setUser(it) }
+    val backStackEntry by navHostController.currentBackStackEntryAsState()
+    val currentScreen =BrevIQAppScreen.valueOf(
+        backStackEntry?.destination?.route?:BrevIQAppScreen.HomeScreen.name
+    )
+
+    val startDestination = if (user == null) {
+        BrevIQAppScreen.Login.name
+    } else {
+        BrevIQAppScreen.HomeScreen.name
+    }
 
    
     if (isvisible){
         SplashScreen()
     }
-//    else if (user==null){
-//        SignInScreen(brevIQViewModel = brevIQViewModel, navHostController = navHostController)
-//    }
+
     else{
-        NavHost(navController = navHostController, startDestination =BrevIQAppScreen.Login.name ) {
+        NavHost(navController = navHostController, startDestination =startDestination) {
             composable(route = BrevIQAppScreen.Login.name){
                 LoginUi(brevIQViewModel = brevIQViewModel,navHostController=navHostController)
             }
@@ -79,49 +90,55 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
                 SaveScreen(brevIQViewModel = brevIQViewModel, navController =navHostController )
             }
         }
-//        if (logoutClicked){
-//            AlertCheck(onYesButtonPressed = {
-//                auth.signOut()
-//                brevIQViewModel.clearData()
-//            },
-//                onNoButtonPressed = {
-//                    brevIQViewModel.setLogoutStatus(false)
-//                }
-//            )
-//        }
+        if (logoutClicked){
+            AlertCheck(onYesButtonPressed = {
+                auth.signOut()
+                brevIQViewModel.clearData()
+                brevIQViewModel.setLogoutStatus(false)
+                navHostController.navigate(BrevIQAppScreen.Login.name) {
+                    popUpTo(BrevIQAppScreen.Login.name) {
+                        inclusive = true
+                    }
+                }
+            },
+                onNoButtonPressed = {
+                    brevIQViewModel.setLogoutStatus(false)
+                }
+            )
+        }
     }
     
 }
-//@Composable
-//fun AlertCheck(
-//    onYesButtonPressed:()->Unit,
-//    onNoButtonPressed:()->Unit
-//
-//){
-//    AlertDialog(
-//        title = {
-//            Text(text = "Logout?", fontWeight = FontWeight.Bold)
-//        },
-//        containerColor = Color.White,
-//        text = {
-//            Text(text = "Are you sure you want to Logout")
-//        },
-//        confirmButton = {
-//            TextButton(onClick = {
-//                onYesButtonPressed()
-//            }) {
-//                Text(text = "Yes")
-//            }
-//        },
-//        dismissButton = {
-//            TextButton(onClick = {
-//                onNoButtonPressed()
-//            }) {
-//                Text(text = "No")
-//            }
-//        },
-//        onDismissRequest = {
-//            onNoButtonPressed()
-//        }
-//    )
-//}
+@Composable
+fun AlertCheck(
+    onYesButtonPressed:()->Unit,
+    onNoButtonPressed:()->Unit
+
+){
+    AlertDialog(
+        title = {
+            Text(text = "Logout?", fontWeight = FontWeight.Bold)
+        },
+        containerColor = Color.White,
+        text = {
+            Text(text = "Are you sure you want to Logout")
+        },
+        confirmButton = {
+            TextButton(onClick = {
+                onYesButtonPressed()
+            }) {
+                Text(text = "Yes")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = {
+                onNoButtonPressed()
+            }) {
+                Text(text = "No")
+            }
+        },
+        onDismissRequest = {
+            onNoButtonPressed()
+        }
+    )
+}
