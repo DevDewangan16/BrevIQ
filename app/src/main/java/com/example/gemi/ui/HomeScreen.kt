@@ -88,13 +88,15 @@ fun HomeScreen(brevIQViewModel: BrevIQViewModel,
                             contentScale = ContentScale.FillBounds
                         )
                         Text(
-                            text = "\uD83D\uDCC4 Summarize Documents & Notes",
+//                            text = "\uD83D\uDCC4 Summarize Documents & Notes",
+                            text="\uD83D\uDCA1 Instant Knowledge Extraction",
                             fontSize = 18.sp,
                             color = Color.Black,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Upload PDFs, text, or handwritten notes to generate concise summaries.",
+                            //text = "Upload PDFs, text, or handwritten notes to generate concise summaries.",
+                            text = "Get instant answers and key takeaways from text-based questions and media.",
                             fontSize = 15.sp,
                             color = Color.Black,
                             textAlign = TextAlign.Center
