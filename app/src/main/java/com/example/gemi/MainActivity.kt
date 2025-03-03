@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
             GemiTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                     BrevIQApp()
-                   // HomeScreen()
                 }
             }
         }

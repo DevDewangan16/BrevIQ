@@ -79,7 +79,7 @@
                 .fillMaxWidth()
                 .height(50.dp)
                 .clickable {
-                     brevIQViewModel.setLogoutStatus(true)
+                     brevIQViewModel.setLogoutStatus(true)//getting the alert check which is the prompt screen for the logout option
                 },
                 colors = CardDefaults.cardColors(
                     containerColor = Color(0xFFFBAE75)

@@ -102,7 +102,7 @@ fun ImageToTextScreen(brevIQViewModel: BrevIQViewModel, apiKey: String) {
                     IconButton(
                         modifier = Modifier.weight(0.5f),
                         onClick = {
-                            bitmap?.let { brevIQViewModel.processImage(it, apiKey) }
+                            bitmap?.let { brevIQViewModel.processImage(it, apiKey) }//used to target or call the IMAGETOTEXT response
                         },
                         enabled = bitmap != null
                     ) {

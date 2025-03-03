@@ -222,6 +222,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
         myRef.push().setValue(item)
     }
 
+    //getting data from the firebase and adding the saved information
     fun fillCartItems(){
         // Read from the database
         myRef.addValueEventListener(object : ValueEventListener {
@@ -244,6 +245,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
         })
     }
 
+    //removing the data from the saved screen and also database
     fun removeFromCart(oldItem:DataBase){
         /* _cartItems.value = _cartItems.value - item
          viewModelScope.launch {

@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.util.Base64
 import java.io.ByteArrayOutputStream
 
+//used for converting the bitmap means the image format to the base means the string format
 object ImageUtils {
     fun convertBitmapToBase64(bitmap: Bitmap): String {
         val outputStream = ByteArrayOutputStream()
