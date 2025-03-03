@@ -7,6 +7,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+// This is for the text to text response
 object RetrofitClient {
     private const val BASE_URL = "https://generativelanguage.googleapis.com/"
 

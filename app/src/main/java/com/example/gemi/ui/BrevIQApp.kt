@@ -18,6 +18,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 
+//used to manage the screen
 enum class BrevIQAppScreen(){
     Login,
     SignUp,
@@ -40,11 +41,11 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
     val isvisible by brevIQViewModel.isvisible.collectAsState()
     val user by brevIQViewModel.user.collectAsState()
 
-    val logoutClicked by brevIQViewModel.logoutClicked.collectAsState()
+    val logoutClicked by brevIQViewModel.logoutClicked.collectAsState()//used to manage the the manage the logout or alert screen
 
 
     auth.currentUser?.let { brevIQViewModel.setUser(it) }
-    val backStackEntry by navHostController.currentBackStackEntryAsState()
+    val backStackEntry by navHostController.currentBackStackEntryAsState()//used to control the back buttton navigation
     val currentScreen =BrevIQAppScreen.valueOf(
         backStackEntry?.destination?.route?:BrevIQAppScreen.HomeScreen.name
     )

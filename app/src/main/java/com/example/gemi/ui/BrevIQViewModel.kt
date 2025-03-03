@@ -60,6 +60,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
     private val _databaseList=MutableStateFlow<List<DataBase>>(emptyList())
     val databaseList:StateFlow<List<DataBase>>get() = _databaseList.asStateFlow()
 
+    //used for fetching the response with the help of Gemini of the Text to Text based
     fun fetchResponse(prompt: String) {
         viewModelScope.launch {
             try {
@@ -88,6 +89,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
     var extractedText = mutableStateOf("No response yet")
 
+    //used to fetch response with the help of Gemini of the Image to Text based
     fun processImage(bitmap: Bitmap, apiKey: String) {
         val base64Image = ImageUtils.convertBitmapToBase64(bitmap)
 
@@ -176,6 +178,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
     val database= Firebase.database
     val myRef = database.getReference("users/${auth.currentUser?.uid}/cart")
 
+    //for storing in the datastore and get the information while reopen the app
     private val Context.datastore : DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore("cart")
     private val cartItemsKey= stringPreferencesKey("cart_items")
     private val context=application.applicationContext
@@ -268,6 +271,7 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
     }
 
 
+    //this block of code always executed when the user open or reopen the app
     init {
         screenJob=viewModelScope.launch(Dispatchers.Default) {
             delay(3000)
