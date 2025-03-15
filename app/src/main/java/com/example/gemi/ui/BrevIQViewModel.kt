@@ -25,6 +25,7 @@ import com.example.gemi.ui.data.DataBase
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.Part
 import com.example.gemi.ui.data.RequestResponse
+import com.example.gemi.ui.data.UserInfo
 import com.google.android.gms.common.api.Response
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
@@ -177,6 +178,14 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
     val database= Firebase.database
     val myRef = database.getReference("users/${auth.currentUser?.uid}/cart")
+
+    private val _userInfo=MutableStateFlow<UserInfo?>(null)
+    val userInfo:MutableStateFlow<UserInfo?>get() = _userInfo
+    val myRef2 = database.getReference("users/${auth.currentUser?.uid}/userDetails")
+
+    fun addUserToDatabase(item:UserInfo){
+        myRef2.push().setValue(item)
+    }
 
     //for storing in the datastore and get the information while reopen the app
     private val Context.datastore : DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore("cart")

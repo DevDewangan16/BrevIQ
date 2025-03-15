@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.gemi.R
+import com.example.gemi.ui.data.UserInfo
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -189,6 +190,9 @@ fun SignUpScreen(brevIQViewModel: BrevIQViewModel,
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener() { task ->
                         if (task.isSuccessful) {
+                            brevIQViewModel.addUserToDatabase(
+                                UserInfo(name,email, password)
+                            )
                             // Sign in success, update UI with the signed-in user's information
                             navHostController.navigate(BrevIQAppScreen.HomeScreen.name)
 
