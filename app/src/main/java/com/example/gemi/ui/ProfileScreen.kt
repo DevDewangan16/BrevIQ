@@ -31,69 +31,55 @@
     @Composable
     fun ProfileScreen(brevIQViewModel: BrevIQViewModel) {
         val userInfo by brevIQViewModel.userInfo.collectAsState()
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(10.dp)
+        ) {
+            Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
 
-        LaunchedEffect(Unit) {
-            brevIQViewModel.fetchUserFromDatabase() // Ensure data fetch
-        }
-
-        if (userInfo == null) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+            Card(
+                modifier = Modifier.fillMaxWidth().size(300.dp),
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFF5EFF1))
             ) {
-                Text(text = "Loading...", fontSize = 20.sp)
-            }
-        } else {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(10.dp)
-            ) {
-                Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
-
-                Card(
-                    modifier = Modifier.fillMaxWidth().size(300.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFF5EFF1))
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.profile_image),
-                            contentDescription = "",
-                            modifier = Modifier.size(150.dp).padding(5.dp),
-                            contentScale = ContentScale.FillBounds,
-                            alignment = Alignment.Center
-                        )
-                        Text(
-                            text = "Name : ${userInfo?.name ?: "N/A"}",
-                            modifier = Modifier.fillMaxWidth().padding(3.dp),
-                            fontSize = 20.sp
-                        )
-                        Text(
-                            text = "Email : ${userInfo?.email ?: "N/A"}",
-                            modifier = Modifier.fillMaxWidth().padding(3.dp),
-                            fontSize = 20.sp
-                        )
-                        Text(
-                            text = "Password : ${userInfo?.password ?: "N/A"}",
-                            modifier = Modifier.fillMaxWidth().padding(3.dp),
-                            fontSize = 20.sp
-                        )
-                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.profile_image),
+                        contentDescription = "",
+                        modifier = Modifier.size(150.dp).padding(5.dp),
+                        contentScale = ContentScale.FillBounds,
+                        alignment = Alignment.Center
+                    )
+                    Text(
+                        text = "Name : ${userInfo?.name ?: "N/A"}",
+                        modifier = Modifier.fillMaxWidth().padding(3.dp),
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = "Email : ${userInfo?.email ?: "N/A"}",
+                        modifier = Modifier.fillMaxWidth().padding(3.dp),
+                        fontSize = 20.sp
+                    )
+                    Text(
+                        text = "Password : ${userInfo?.password ?: "N/A"}",
+                        modifier = Modifier.fillMaxWidth().padding(3.dp),
+                        fontSize = 20.sp
+                    )
                 }
+            }
 
-                Card(
-                    modifier = Modifier.fillMaxWidth().height(50.dp).clickable {
-                        brevIQViewModel.setLogoutStatus(true) // Show logout confirmation
-                    },
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFBAE75))
-                ) {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Logout", textAlign = TextAlign.Center, fontSize = 16.sp)
-                    }
+            Card(
+                modifier = Modifier.fillMaxWidth().height(50.dp).clickable {
+                    brevIQViewModel.setLogoutStatus(true) // Show logout confirmation
+                },
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFBAE75))
+            ) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Logout", textAlign = TextAlign.Center, fontSize = 16.sp)
                 }
             }
         }
