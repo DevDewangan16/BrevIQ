@@ -11,6 +11,7 @@ import android.graphics.Bitmap
 import android.net.http.HttpException
 import android.os.Build
 import android.telecom.Call
+import android.util.Log
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.core.DataStore
@@ -185,6 +186,39 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
     fun addUserToDatabase(item:UserInfo){
         myRef2.push().setValue(item)
+    }
+    fun fetchUserFromDatabase() {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            println("User is not logged in")
+            _userInfo.value = null // Explicitly set to null
+            return
+        }
+
+        println("Current User UID: ${currentUser.uid}")
+        val myRef2 = database.getReference("users/${currentUser.uid}/userDetails")
+        println("Database Path: users/${currentUser.uid}/userDetails")
+
+        myRef2.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        val user = childSnapshot.getValue(UserInfo::class.java)
+                        println("Fetched User: $user")
+                        _userInfo.value = user
+                        break // Stop after fetching the first user
+                    }
+                } else {
+                    println("No data found at the specified path")
+                    _userInfo.value = null // Explicitly set to null
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("Database error: ${error.message}")
+                _userInfo.value = null // Explicitly set to null
+            }
+        })
     }
 
     //for storing in the datastore and get the information while reopen the app
