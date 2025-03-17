@@ -20,6 +20,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.gemi.BuildConfig
 import com.example.gemi.ui.ImageUtils.convertBitmapToBase64
 import com.example.gemi.ui.data.Content
 import com.example.gemi.ui.data.DataBase
@@ -51,7 +52,7 @@ import javax.security.auth.callback.Callback
 
 class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 
-    private val apiKey = "AIzaSyDbGhLvg47UU1tY7O0LS7dbeho1dFEuvPk"
+    private val apiKey = BuildConfig.GEMINI_API_KEY
 
     private val _response = MutableStateFlow("Ask something...")
     val response = _response.asStateFlow()

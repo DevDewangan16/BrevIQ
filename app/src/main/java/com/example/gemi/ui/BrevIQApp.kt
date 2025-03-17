@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.gemi.BuildConfig
 import com.google.firebase.auth.FirebaseAuth
 
 //used to manage the screen
@@ -36,7 +37,7 @@ val auth= FirebaseAuth.getInstance()
 fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
               navHostController: NavHostController= rememberNavController()){
 
-    val apiKey = "AIzaSyDbGhLvg47UU1tY7O0LS7dbeho1dFEuvPk"
+    val apiKey = BuildConfig.GEMINI_API_KEY
 
     val isvisible by brevIQViewModel.isvisible.collectAsState()
     val user by brevIQViewModel.user.collectAsState()

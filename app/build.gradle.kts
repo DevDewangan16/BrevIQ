@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.org.jetbrains.kotlin.android)
@@ -22,6 +24,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        val properties = Properties()
+        file("C:\\Users\\Asus\\AndroidStudioProjects\\Gemi\\local.properties").inputStream().use { properties.load(it) }
+        buildConfigField("String", "GEMINI_API_KEY", "\"${properties.getProperty("GEMINI_API_KEY")}\"")
     }
 
     buildTypes {
@@ -41,6 +46,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true // Enable BuildConfig generation
         compose = true
     }
     composeOptions {
