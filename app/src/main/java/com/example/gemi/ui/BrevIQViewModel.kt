@@ -2,17 +2,11 @@ package com.example.gemi.ui
 
 import Content1
 import GeminiImageRequest
-import GeminiImageResponse
 import InlineData
 import Part1
 import android.app.Application
 import android.content.Context
 import android.graphics.Bitmap
-import android.net.http.HttpException
-import android.os.Build
-import android.telecom.Call
-import android.util.Log
-import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.mutableStateOf
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.edit
@@ -21,19 +15,16 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gemi.BuildConfig
-import com.example.gemi.ui.ImageUtils.convertBitmapToBase64
 import com.example.gemi.ui.data.Content
 import com.example.gemi.ui.data.DataBase
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.Part
 import com.example.gemi.ui.data.RequestResponse
 import com.example.gemi.ui.data.UserInfo
-import com.google.android.gms.common.api.Response
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
 import kotlinx.coroutines.Dispatchers
@@ -47,8 +38,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.IOException
-import javax.security.auth.callback.Callback
+
 
 class BrevIQViewModel(application:Application):AndroidViewModel(application) {
 

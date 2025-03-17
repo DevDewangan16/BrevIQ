@@ -1,8 +1,6 @@
 package com.example.gemi.ui
 
-import GeminiImageRequest
-import GeminiImageResponse
-import android.telecom.Call
+
 import com.example.gemi.ui.data.GeminiRequest
 import com.example.gemi.ui.data.GeminiResponse
 import retrofit2.http.Body
