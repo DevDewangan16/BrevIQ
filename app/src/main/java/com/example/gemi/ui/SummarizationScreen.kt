@@ -67,7 +67,9 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
             .padding(10.dp),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Spacer(modifier = Modifier.fillMaxWidth().height(20.dp))
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(20.dp))
         // Chat History
         Box(
             modifier = Modifier
@@ -89,12 +91,31 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
                             .padding(vertical = 4.dp),
                         contentAlignment = alignment
                     ) {
-                        MarkdownText(
-                            markdown = message.text,
-                            modifier = Modifier
-                                .background(backgroundColor, shape = RoundedCornerShape(8.dp))
-                                .padding(horizontal = 16.dp, vertical = 8.dp)
-                        )
+                        Column {
+                            MarkdownText(
+                                markdown = message.text,
+                                modifier = Modifier
+                                    .background(backgroundColor, shape = RoundedCornerShape(8.dp))
+                                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                            )
+                            if (!message.isQuestion){
+                                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                                    Button(onClick = {
+                                        brevIQViewModel.addToDatabase(
+                                            DataBase(
+                                                userInput.toString(),
+                                                message.text
+                                            )
+                                        )
+                                    },
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color(0xFF2F2F2F)
+                                        )) {
+                                        Text(text = "Save")
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -128,7 +149,9 @@ fun SummariztionScreen(brevIQViewModel: BrevIQViewModel,navHostController: NavHo
                 }
             }
         )
-        Spacer(modifier = Modifier.fillMaxWidth().height(20.dp))
+        Spacer(modifier = Modifier
+            .fillMaxWidth()
+            .height(20.dp))
     }
 //    var userInput by remember { mutableStateOf(TextFieldValue("")) }
 //    val response by brevIQViewModel.response.collectAsState()

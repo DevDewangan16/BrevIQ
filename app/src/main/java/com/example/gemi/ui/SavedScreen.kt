@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
@@ -49,7 +50,9 @@ fun SaveScreen(brevIQViewModel: BrevIQViewModel,navController: NavController) {
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(text = "Request: ${entry.request}")
-                        Text(text = "Response: ${entry.response}")
+                        MarkdownText(
+                            markdown = "Response: ${entry.response}"
+                        )
                         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                             Button(onClick = {
                                 brevIQViewModel.removeFromCart(entry)
