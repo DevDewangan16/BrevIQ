@@ -35,8 +35,6 @@ val auth= FirebaseAuth.getInstance()
 fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
               navHostController: NavHostController= rememberNavController()){
 
-    val apiKey = BuildConfig.GEMINI_API_KEY
-
     val isvisible by brevIQViewModel.isvisible.collectAsState()
     val user by brevIQViewModel.user.collectAsState()
 
@@ -79,7 +77,7 @@ fun BrevIQApp(brevIQViewModel: BrevIQViewModel= viewModel(),
                 HomeScreen(brevIQViewModel = brevIQViewModel, navHostController =navHostController )
             }
             composable(route = BrevIQAppScreen.PrescriptionScreen.name){
-                ImageToTextScreen(brevIQViewModel = brevIQViewModel, apiKey =apiKey )
+                ImageToTextScreen(brevIQViewModel = brevIQViewModel)
             }
             composable(route = BrevIQAppScreen.History.name){
                 HistoryScreen(brevIQViewModel,navController = navHostController)
