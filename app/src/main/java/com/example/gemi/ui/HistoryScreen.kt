@@ -35,8 +35,14 @@ fun HistoryScreen(brevIQViewModel: BrevIQViewModel,navController: NavController)
                     )
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(text = "Request: ${entry.request}")
-                        Text(text = "Response: ${entry.response}")
+//                        Text(text = "Request: ${entry.request}")
+//                        Text(text = "Response: ${entry.response}")
+                        MarkdownText(
+                            markdown = "Request: ${entry.request}"
+                        )
+                        MarkdownText(
+                            markdown = "Response: ${entry.response}"
+                        )
                     }
                 }
             }

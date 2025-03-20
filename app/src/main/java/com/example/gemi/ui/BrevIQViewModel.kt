@@ -81,6 +81,10 @@ class BrevIQViewModel(application:Application):AndroidViewModel(application) {
                 // Add the response to the chat history
                 _chatHistory.value += ChatMessage(text = responseText, isQuestion = false)
 
+                //add in the history screen
+                val newEntry = RequestResponse(prompt,responseText)
+               _historyList.value = _historyList.value + newEntry
+
             } catch (e: Exception) {
                 // Add the error message to the chat history
                 _chatHistory.value += ChatMessage(text = "Error: ${e.message}", isQuestion = false)
