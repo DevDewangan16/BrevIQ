@@ -10,7 +10,8 @@ data class Content1(
 )
 
 data class Part1(
-    @SerializedName("inlineData") val inlineData: InlineData
+    @SerializedName("text") val text: String? = null,
+    @SerializedName("inlineData") val inlineData: InlineData? = null
 )
 
 data class InlineData(
@@ -31,4 +32,9 @@ data class ContentResponse(
 
 data class TextPart(
     @SerializedName("text") val text: String
+)
+
+data class ImageMessage(
+    val text: String,
+    val isQuestion: Boolean
 )
