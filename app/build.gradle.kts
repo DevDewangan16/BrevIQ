@@ -112,4 +112,9 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.15.1") // For Image Loading
     implementation("com.google.android.gms:play-services-basement:18.5.0")
 
+    implementation("io.noties.markwon:core:4.6.2")
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation("io.coil-kt:coil-gif:2.2.2")
+
+
 }
